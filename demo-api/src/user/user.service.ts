@@ -10,15 +10,25 @@ export class UserService {
         private userRepository: Repository<User>,
     ) { }
 
-    findAll(): Promise<User[]> {
+    findAllUsers(): Promise<User[]> {
         return this.userRepository.find();
     }
 
-    findOne(id: string): Promise<User> {
+    findOneUser(id: string): Promise<User> {
         return this.userRepository.findOne(id);
     }
 
-    async remove(id: string): Promise<void> {
+    createUser(user: User): Promise<User> 
+    {
+        delete user.id;
+        return this.userRepository.save(user);
+    }
+
+    updateUser(user: User): Promise<User>{
+        return this.userRepository.save(user);
+    }
+
+    async removeUser(id: string): Promise<void> {
         this.userRepository.delete(id);
     }
 }
