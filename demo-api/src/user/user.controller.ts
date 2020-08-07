@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Body, Post, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Param, Body, Post, Put, Delete, NotFoundException } from '@nestjs/common';
 import { User } from './entity/user.entity';
 import { UserService } from './user.service';
 import { CreateDto, UpdateDto } from './dto';
@@ -29,12 +29,18 @@ export class UserController {
     }
 
     @Put(':id')
-    update(
+    async update(
         @Param('id') id: string,
         @Body() updateDto: UpdateDto): Promise<User> {
-        const user = new User();
+        const user = await this.userService.findOneUser(id);
+        if(user === undefined){
+            throw new NotFoundException(`User with id ${id} not found`);
+        }
+        user.firstName = updateDto.firstName;
+        user.lastName = updateDto.lastName;
+        user.isActive = updateDto.isActive; 
 
-        return;
+        return this.userService.updateUser(user);;
     }
 
     @Delete(':id')
