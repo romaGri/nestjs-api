@@ -5,8 +5,15 @@
   "username": "root",
   "password": "1234",
   "database": "usersdb",
+  "dropSchema": false,
+  "synchronize": true,
+  "migrationsRun": false,
+  "logging": true,
+  "migrations": ["dist/src/**/db/migrations/*{.ts,.js}"],
+  "cli": {
+    "migrationsDir": "db/migrations"
+  },
   "entities": [
-    "dist/**/*.entity{.ts,.js}"
-  ],
-  "synchronize": true
+      "dist/**/*.entity{.ts,.js}"
+  ]
 }
