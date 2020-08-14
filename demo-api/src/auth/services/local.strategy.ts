@@ -7,7 +7,7 @@ import { AuthService } from "./auth.service";
 export class LocalStrategy extends PassportStrategy(Strategy) {
     constructor(private authService: AuthService) {
         super({
-            usernameFiled: 'login'
+            usernameFiled: 'login',
         });
     }
 
@@ -15,7 +15,8 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
         const admin = await this.authService.validateAdmin(login, password);
 
         if (!admin) {
-            throw new UnauthorizedException();
+            //throw new UnauthorizedException();
+            return admin;
         }
 
         return admin;

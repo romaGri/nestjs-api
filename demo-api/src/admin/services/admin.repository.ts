@@ -11,6 +11,11 @@ export class AdminRepository {
                 id: 1,
                 login:'roma',
                 password:'1234'
+            },
+            {
+                id:2, 
+                login: 'neRoma',
+                password: '1111'
             }
         ];
     }
