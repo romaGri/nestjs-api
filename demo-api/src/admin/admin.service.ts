@@ -1,8 +1,8 @@
-import { Admin } from '../models/admin';
+import { Admin } from './models/admin';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class AdminRepository {
+export class AdminService {
     private readonly admins: Admin[];
 
     constructor() {
